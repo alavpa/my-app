@@ -12,7 +12,7 @@ type Sprites = {
     front_default: string;
 }
 
-export type Pokedex = {
+export type PokemonList = {
     count: number;
     next: string;
     previous: string;

@@ -1,5 +1,5 @@
-import { PokemonDetails } from '@/src/models/Pokedex';
-import getPokemon from '@/src/services/GetPokemon';
+import { PokemonDetails } from '@/src/models/Pokemons';
+import { getPokemon } from '@/src/services/GetPokemon';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { useEffect, useState } from 'react';
@@ -29,8 +29,8 @@ export default function DetailsScreen() {
         <>
           <Stack.Screen options={{ title: data?.name }} />
           <View>
-            <Text>{data?.name}</Text>
             <Image source={{ uri: data?.sprites.front_default }} style={styles.image} />
+            <Text style={styles.title}>{data?.name}</Text>
           </View>
         </>
       )}
@@ -41,11 +41,16 @@ export default function DetailsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    padding: 16,
   },
   image: {
-    width: 100,
-    height: 100,
-  }
+    width: 200,
+    height: 200,
+  },
+  title: {
+    fontSize: 48,
+    fontWeight: 'bold',
+  },
 });

@@ -1,8 +1,9 @@
-import { PokemonItem } from '@/src/models/Pokedex';
-import getPokemons from '@/src/services/GetPokemons';
-import { Link } from 'expo-router';
+import React from 'react';
+import { PokemonItem } from '@/src/models/Pokemons';
+import { getPokemons } from '@/src/services/GetPokemons';
 import { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ActivityIndicator, FlatList } from 'react-native';
+import { View, StyleSheet, ActivityIndicator, FlatList } from 'react-native';
+import Item from '@/app/components/Item';
 
 export default function HomeScreen() {
   const [isLoading, setLoading] = useState(true);
@@ -11,10 +12,10 @@ export default function HomeScreen() {
 
   useEffect(() => {
     getPokemons(
-      (response)=>{setData(response.results)},(error)=>{console.error(error)},()=>{setLoading(false)}
+      (response) => { setData(response.results) }, (error) => { console.error(error) }, () => { setLoading(false) }
     );
-  }, []);
-  
+  });
+
   return (
     <View style={styles.container}>
       {isLoading ? (
@@ -22,12 +23,10 @@ export default function HomeScreen() {
       ) : (
         <FlatList
           data={data}
-          keyExtractor={({url}) => url}
-          renderItem={({item}) => (
-            <Link href={{
-              pathname: "/details/[url]",
-              params: { url: item.url }
-            }}>{item.name}</Link>
+          keyExtractor={item => item.url}
+          style={{ width: '100%' }}
+          renderItem={({ item }) => (
+            <Item item={item}/>
           )}
         />
       )}

@@ -1,6 +1,6 @@
-import { PokemonDetails } from "../models/Pokedex";
+import { PokemonDetails } from "../models/Pokemons";
 
-const getPokemon = async (
+export const getPokemon = async (
     url: string,
     onSuccess: (response: PokemonDetails) => void,
     onError: (error: Error) => void,
@@ -19,5 +19,3 @@ const getPokemon = async (
         onLoaded();
     }
 };
-
-export default getPokemon;
