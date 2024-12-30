@@ -1,10 +1,8 @@
-import { PokemonItem } from '@/app/models/Pokedex';
-import getPokemons from '@/app/services/GetPokemons';
+import { PokemonItem } from '@/src/models/Pokedex';
+import getPokemons from '@/src/services/GetPokemons';
 import { Link } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator, FlatList } from 'react-native';
-
-// https://pokeapi.co/api/v2/pokedex
 
 export default function HomeScreen() {
   const [isLoading, setLoading] = useState(true);
@@ -27,8 +25,8 @@ export default function HomeScreen() {
           keyExtractor={({url}) => url}
           renderItem={({item}) => (
             <Link href={{
-              pathname: "/details/[id]",
-              params: { id: item.url }
+              pathname: "/details/[url]",
+              params: { url: item.url }
             }}>{item.name}</Link>
           )}
         />
